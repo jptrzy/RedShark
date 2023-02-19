@@ -1,0 +1,22 @@
+using Gtk 4.0;
+using Adw 1;
+
+template GtkListItem {
+    child: Box {
+        orientation: vertical;
+        styles ["card"]
+
+        Image {
+            icon-name: "audio_volume-muted";
+        }
+
+        Label {
+            label: bind GtkListItem.item.title typeof VideoEntry;
+            styles ["heading"]
+        }
+
+        Label {
+            label: bind GtkListItem.item.channel typeof VideoEntry;
+        }
+    };
+}

@@ -1,0 +1,21 @@
+using Gtk 4.0;
+using Adw 1;
+
+template VideosList : Box {
+    hexpand: true;
+    vexpand: true;
+
+    ScrolledWindow {
+        hexpand: true;
+        vexpand: true;
+        
+        GridView list {
+            single-click-activate: true;
+            activate => on_click();
+
+            factory: BuilderListItemFactory factory {
+                resource: "/ui/VideosListEntry.ui";
+            };
+        }
+    }
+}

@@ -1,0 +1,48 @@
+diff --git a/blueprintcompiler/language/binding.py b/blueprintcompiler/language/binding.py
+index 91d5a6b..c6a6bf7 100644
+--- a/blueprintcompiler/language/binding.py
++++ b/blueprintcompiler/language/binding.py
+@@ -20,15 +20,23 @@
+ from dataclasses import dataclass
+ 
+ from .common import *
+-from .expression import ExprChain, LookupOp, IdentExpr
+ from .contexts import ValueTypeCtx
+ 
+ 
+ class Binding(AstNode):
+-    grammar = [
+-        Keyword("bind"),
+-        ExprChain,
+-    ]
++    grammar = AnyOf(
++        [
++            Keyword("bind"),
++            ExprChain,
++            Keyword("typeof"),
++            UseIdent("handler").expected("the name of a function to handle the signal"),
++        ],
++        [
++            Keyword("bind"),
++            ExprChain,
++        ],
++    )
+ 
+     @property
+     def expression(self) -> ExprChain:
+diff --git a/blueprintcompiler/outputs/xml/__init__.py b/blueprintcompiler/outputs/xml/__init__.py
+index c38c070..4db62e4 100644
+--- a/blueprintcompiler/outputs/xml/__init__.py
++++ b/blueprintcompiler/outputs/xml/__init__.py
+@@ -210,7 +212,10 @@ class XmlOutput(OutputFormat):
+         xml.end_tag()
+ 
+     def _emit_lookup_op(self, expr: LookupOp, xml: XmlEmitter):
+-        xml.start_tag("lookup", name=expr.property_name, type=expr.lhs.type)
++        if expr.lhs.type == None and (type := expr.parent.parent.tokens.get("handler")) != None:
++            xml.start_tag("lookup", name=expr.property_name, type=type)
++        else:
++            xml.start_tag("lookup", name=expr.property_name, type=expr.lhs.type)
+         self._emit_expression_part(expr.lhs, xml)
+         xml.end_tag()
+ 

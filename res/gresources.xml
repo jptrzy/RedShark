@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+<gresource prefix="/">
+<!-- Styles -->
+    <!--<file>style/App.css</file>-->
+
+<!-- UI -->
+
+   <file compressed="true">ui/AppWindow.ui</file>
+   <file compressed="true">ui/AboutWindow.ui</file>
+   <file compressed="true">ui/VideosList.ui</file>
+   <file compressed="true">ui/VideosListEntry.ui</file>
+
+</gresource>
+</gresources>
