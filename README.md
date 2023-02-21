@@ -2,7 +2,7 @@
 It is a "simple" youtube client.
 
 # How it works
-It uses [YuruVerse API](https://funami.tech) to search throw youtube.
+It uses [YuruVerse API](https://funami.tech) or Google API (requires api key) to search throw youtube.
 After opening video it uses [mpv](https://mpv.io) with [yt-dlp](https://github.com/yt-dlp/yt-dlp) to watch it.
 
 # FAQ
