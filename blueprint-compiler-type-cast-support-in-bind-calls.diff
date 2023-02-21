@@ -1,13 +1,8 @@
 diff --git a/blueprintcompiler/language/binding.py b/blueprintcompiler/language/binding.py
-index 91d5a6b..c6a6bf7 100644
+index 91d5a6b..1b8e9db 100644
 --- a/blueprintcompiler/language/binding.py
 +++ b/blueprintcompiler/language/binding.py
-@@ -20,15 +20,23 @@
- from dataclasses import dataclass
- 
- from .common import *
--from .expression import ExprChain, LookupOp, IdentExpr
- from .contexts import ValueTypeCtx
+@@ -25,10 +25,18 @@ from .contexts import ValueTypeCtx
  
  
  class Binding(AstNode):
@@ -31,10 +26,10 @@ index 91d5a6b..c6a6bf7 100644
      @property
      def expression(self) -> ExprChain:
 diff --git a/blueprintcompiler/outputs/xml/__init__.py b/blueprintcompiler/outputs/xml/__init__.py
-index c38c070..4db62e4 100644
+index c38c070..18caa9b 100644
 --- a/blueprintcompiler/outputs/xml/__init__.py
 +++ b/blueprintcompiler/outputs/xml/__init__.py
-@@ -210,7 +212,10 @@ class XmlOutput(OutputFormat):
+@@ -210,7 +210,10 @@ class XmlOutput(OutputFormat):
          xml.end_tag()
  
      def _emit_lookup_op(self, expr: LookupOp, xml: XmlEmitter):

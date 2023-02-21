@@ -5,16 +5,32 @@ template VideosList : Box {
     hexpand: true;
     vexpand: true;
 
-    ScrolledWindow {
+    Stack stack {
         hexpand: true;
         vexpand: true;
-        
-        GridView list {
-            single-click-activate: true;
-            activate => on_click();
 
-            factory: BuilderListItemFactory factory {
-                resource: "/ui/VideosListEntry.ui";
+        StackPage {
+            name: "load";
+            child: Spinner spinner {
+                spinning: true;
+                valign: center;
+                height-request: 48;
+            };
+        }
+
+        StackPage {
+            name: "view";
+            child: ScrolledWindow { 
+                GridView list {
+                    vexpand: true;
+                    max-columns: 4;
+                    single-click-activate: true;
+                    activate => on_click();
+
+                    factory: BuilderListItemFactory factory {
+                        resource: "/ui/VideosListEntry.ui";
+                    };
+                }
             };
         }
     }

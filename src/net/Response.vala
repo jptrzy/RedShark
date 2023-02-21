@@ -15,6 +15,10 @@ class Response {
         this._input_stream = input_stream;
     }
 
+    public InputStream stream() {
+        return this._input_stream;
+    }
+
     public async Bytes bytes () throws Error {
         var output_stream = new MemoryOutputStream.resizable ();
         var input_stream = this._input_stream;

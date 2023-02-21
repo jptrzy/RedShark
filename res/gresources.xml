@@ -7,7 +7,6 @@
 <!-- UI -->
 
    <file compressed="true">ui/AppWindow.ui</file>
-   <file compressed="true">ui/AboutWindow.ui</file>
    <file compressed="true">ui/VideosList.ui</file>
    <file compressed="true">ui/VideosListEntry.ui</file>
 

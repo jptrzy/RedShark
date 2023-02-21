@@ -4,7 +4,6 @@
 
 res_input = files (
   'ui/AppWindow.blp',
-  'ui/AboutWindow.blp',
   'ui/VideosList.blp',
   'ui/VideosListEntry.blp',
 )
@@ -17,11 +16,16 @@ res_input = files (
 
 r = run_command('blueprint-compiler', 'batch-compile', meson.current_source_dir (), meson.current_source_dir (), res_input)
 
-output = r.stdout().strip()
-errortxt = r.stderr().strip()
+if r.returncode() != 0
+  output = r.stdout().strip()
+  errortxt = r.stderr().strip()
 
-message (output)
-message (errortxt)
+  message (output)
+  message (errortxt)
+
+  error('')
+endif
+
 
 res_sources = gnome.compile_resources (
   'gresources', 'gresources.xml',

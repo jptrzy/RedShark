@@ -1,6 +1,8 @@
 sources = res_sources
 
 sources += [
+  'Config.vala',
+
   'widgets/VideosList.vala',
 
   'net/Fetch.vala',
@@ -8,7 +10,7 @@ sources += [
 
   'AppWindow.vala',
   'App.vala',
-  ]
+]
 
 deps = [
     soup_dep,
@@ -16,6 +18,7 @@ deps = [
 	gtk_dep,
 	gee_dep,
     gjson_dep,
+    json_glib_dep,
 	adwaita_dep,
 ]
 

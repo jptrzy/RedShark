@@ -8,28 +8,28 @@ class AppWindow : Adw.ApplicationWindow {
     public AppWindow (App app) {
         Object (application: app);
 
-
         videos_list = new VideosList (); 
 
         videos_list_holder.append (videos_list);
     }
 
-    construct {}
-
-
     [GtkCallback]
     public async void show_info () {
         message ("Show info");
 
-        var builder = new Gtk.Builder.from_resource ("/ui/AboutWindow.ui");
-		var window = (Adw.AboutWindow) builder.get_object ("window");
+		var window = new Adw.AboutWindow();
 
         window.application_name = "RedShark";
         window.version = "0.0.1";
         window.developer_name = "Jakub (jptrzy) Trzeciak";
-
         window.license_type = Gtk.License.GPL_3_0;
 
+        window.comments = "Simple youtube client that uses mpv as a video player.";
+
+        window.website = "https://github.com/jptrzy/RedShark";
+        window.issue_url = "https://github.com/jptrzy/RedShark/issues";
+        window.add_link("🧙 Jptrzy's website", "https://jptrzy.xyz");
+        window.add_link("💸 Support", "https://jptrzy.xyz/donation");
     
         window.show();
     }
@@ -40,7 +40,7 @@ class AppWindow : Adw.ApplicationWindow {
 
         if (text == "") return;
         
-        message ("Search");
+        yield videos_list.search_for (text);
     }
 }
 

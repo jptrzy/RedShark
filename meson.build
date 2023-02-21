@@ -21,16 +21,15 @@ add_project_arguments ('--vapidir', vapidir,
 )
 
 # General dependencies
-gio_dep = dependency ('gio-2.0', version: '>=2.70')
+gio_dep = dependency ('gio-2.0', version: '>=2.74')
 gee_dep = dependency ('gee-0.8', version: '>=0.20')
 
-# Library dependencies
+# Redshark dependencies
 soup_dep      = dependency ('libsoup-3.0', version: '>=3.0')
 gjson_dep     = dependency ('gjson-1.0', version: '>=1.0')
-
-# Redshark dependencies
-gtk_dep     = dependency ('gtk4', version: '>=4.8')
-adwaita_dep = dependency ('libadwaita-1', version: '>=1.2')
+json_glib_dep = dependency('json-glib-1.0')
+gtk_dep       = dependency ('gtk4', version: '>=4.8')
+adwaita_dep   = dependency ('libadwaita-1', version: '>=1.2')
 
 res_sources = []
 subdir ('res')
