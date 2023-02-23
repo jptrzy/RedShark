@@ -3,33 +3,35 @@ using Adw 1;
 
 template GtkListItem {
     child: Box {
-        hexpand: true;
-        vexpand: true;
+        Box {
+            styles ["card"]
+            orientation: vertical;
+            vexpand: false;    
+            hexpand: false;
+    
+            Picture {
+                content-fit: contain;
+    //            keep-aspect-ratio: true;
+                can-shrink: false;
+                file: bind GtkListItem.item.image_path typeof VideoEntry;
+            }
+    
+            Label {
+                vexpand: false;    
+                hexpand: false;
 
-        styles ["card"]
-        orientation: vertical;
-
-
-        Picture {
-            hexpand: true;
-            vexpand: true;
-            content-fit: fill;
-            keep-aspect-ratio: true;
-            file: bind GtkListItem.item.image_path typeof VideoEntry;
-        }
-
-        Label {
-            label: bind GtkListItem.item.title typeof VideoEntry;
-            wrap: true;
-            lines: 2;
-            ellipsize: end;
-            xalign: 0;
-            yalign: 0;
-            styles ["heading"]
-        }
-
-        Label {
-            label: bind GtkListItem.item.channel typeof VideoEntry;
+                label: bind GtkListItem.item.title typeof VideoEntry;
+                wrap: true;
+                lines: 2;
+                ellipsize: end;
+                xalign: 0;
+                yalign: 0;
+                styles ["heading"]
+            }
+    
+            Label {
+                label: bind GtkListItem.item.channel typeof VideoEntry;
+            }
         }
     };
 }

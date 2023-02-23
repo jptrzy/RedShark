@@ -20,7 +20,9 @@ template VideosList : Box {
 
         StackPage {
             name: "view";
-            child: ScrolledWindow { 
+            child: ScrolledWindow {
+                can-focus: true;
+
                 GridView list {
                     vexpand: true;
                     max-columns: 4;
@@ -28,6 +30,7 @@ template VideosList : Box {
                     activate => on_click();
 
                     factory: BuilderListItemFactory factory {
+                        //scope:
                         resource: "/ui/VideosListEntry.ui";
                     };
                 }

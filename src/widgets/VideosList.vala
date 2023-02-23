@@ -4,6 +4,7 @@ class VideoEntry : GLib.Object {
     public string channel {set;get;default = "CHANNEL PLACEHOLDER";}
     public string views {set;get;default = "VIEWS PLACEHOLDER";}
     public File image_path {set;get;}
+    public string video_url {set;get;}
 }
 
 [GtkTemplate (ui = "/ui/VideosList.ui")]
@@ -91,8 +92,8 @@ class VideosList : Gtk.Box {
             model_list.append (new VideoEntry () {
                 title = snippet["title"].as_string(),
                 channel = snippet["channelTitle"].as_string(),
-                //views = cut_number (video["author"].as_integer ()),
                 image_path = target,
+                video_url = "https://www.youtube.com/watch?v=%s".printf (video_id),
             });
         }
 
@@ -110,10 +111,25 @@ class VideosList : Gtk.Box {
         os.write_bytes (yield image.bytes (), null);
     }
 
+
     [GtkCallback]
     public async void on_click (uint pos) {
-        stack.visible_child_name = "watch";
+        message ("run %b", video_player_opened);
+        video_player_opened = true;
+        //stack.visible_child_name = "watch";
+
+        var url = ((VideoEntry) model_list.get_object (pos)).video_url;
+
+        // Blocking with output
+        string standard_output, standard_error;
+        int exit_status;
+        Process.spawn_command_line_sync (
+            "mpv %s".printf (url),
+            out standard_output, out standard_error, out exit_status);
+
+        message (standard_output);
 
         stack.visible_child_name = "view";
+        video_player_opened = false;
     }
 }
