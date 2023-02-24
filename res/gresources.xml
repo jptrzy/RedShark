@@ -2,7 +2,7 @@
 <gresources>
 <gresource prefix="/">
 <!-- Styles -->
-    <!--<file>style/App.css</file>-->
+    <file compressed="true">styles/AppWindow.css</file>
 
 <!-- UI -->
 

@@ -13,8 +13,6 @@ class VideosList : Gtk.Box {
     [GtkChild] private unowned Gtk.Stack stack;
     [GtkChild] private unowned Gtk.Spinner spinner;
 
-    private bool video_player_opened = false;
- 
     public static GLib.ListStore model_list
         = new GLib.ListStore(typeof (VideoEntry));
 
@@ -39,12 +37,11 @@ class VideosList : Gtk.Box {
     }
 
     public async void search_for (string text) {
-        if (stack.visible_child_name == "watch") {
+        if (stack.visible_child_name != "view") {
             return;
         }
 
         stack.visible_child_name = "load";
-        spinner.spinning = true; 
 
         //var url = "https://yt.funami.tech/api/v1/search?q=%s".printf (text);
         var url = "https://www.googleapis.com/youtube/v3/search?key=%s&maxResults=20&part=snippet&type=video&q=%s"
@@ -88,7 +85,6 @@ class VideosList : Gtk.Box {
                 tmp_dir.get_path () + "/thumbnail-" + video_id + ".jpg");
 
             yield downlaod_image (target, image_url);
-
             model_list.append (new VideoEntry () {
                 title = snippet["title"].as_string(),
                 channel = snippet["channelTitle"].as_string(),
@@ -104,32 +100,40 @@ class VideosList : Gtk.Box {
         var image = yield fetch (url);
         
         try {
-            yield file.delete_async (0, null);
+            yield file.delete_async (Priority.DEFAULT, null);
         } catch { }
 
-        var os = file.create (FileCreateFlags.NONE, null);
+        var os = yield file.create_async (FileCreateFlags.NONE, Priority.DEFAULT, null);
         os.write_bytes (yield image.bytes (), null);
     }
 
+    int64 mpv_closed = 0;
 
-    [GtkCallback]
-    public async void on_click (uint pos) {
-        message ("run %b", video_player_opened);
-        video_player_opened = true;
-        //stack.visible_child_name = "watch";
+    public async void play_video (uint pos) {
+        if (GLib.get_real_time () < mpv_closed + 100000 
+                && stack.visible_child_name == "video") {
+            message ("To short time to open new video.");
+            mpv_closed = GLib.get_real_time ();
+            return;
+        }
+
+        stack.visible_child_name = "video";
+        stack.update_state ();
 
         var url = ((VideoEntry) model_list.get_object (pos)).video_url;
 
-        // Blocking with output
         string standard_output, standard_error;
         int exit_status;
         Process.spawn_command_line_sync (
             "mpv %s".printf (url),
             out standard_output, out standard_error, out exit_status);
 
-        message (standard_output);
-
         stack.visible_child_name = "view";
-        video_player_opened = false;
+        mpv_closed = GLib.get_real_time ();
+    }
+
+    [GtkCallback]
+    public void on_click (uint pos) {
+        new Thread<void> ("play_video", () => play_video(pos));
     }
 }

@@ -2,9 +2,6 @@ using Gtk 4.0;
 using Adw 1;
 
 template VideosList : Box {
-    hexpand: true;
-    vexpand: true;
-
     Stack stack {
         hexpand: true;
         vexpand: true;
@@ -26,7 +23,6 @@ template VideosList : Box {
                 GridView list {
                     vexpand: true;
                     max-columns: 4;
-                    single-click-activate: true;
                     activate => on_click();
 
                     factory: BuilderListItemFactory factory {
@@ -34,6 +30,15 @@ template VideosList : Box {
                         resource: "/ui/VideosListEntry.ui";
                     };
                 }
+            };
+        }
+
+        StackPage {
+            name: "video";
+            child: Adw.StatusPage {
+                icon-name: "media-playback-start-symbolic";
+                title: "Video player (MPV) is open.";
+                description: "If you want to search through videos, please close it.";
             };
         }
     }

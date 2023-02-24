@@ -11,6 +11,11 @@ class AppWindow : Adw.ApplicationWindow {
         videos_list = new VideosList (); 
 
         videos_list_holder.append (videos_list);
+
+
+        var css_provider = new Gtk.CssProvider ();
+		css_provider.load_from_resource ("styles/AppWindow.css");
+		Gtk.StyleContext.add_provider_for_display (get_display (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     [GtkCallback]
@@ -35,12 +40,12 @@ class AppWindow : Adw.ApplicationWindow {
     }
 
     [GtkCallback]
-    public async void on_search () {
+    public void on_search () {
         var text = search_entry.text;
 
         if (text == "") return;
         
-        yield videos_list.search_for (text);
+        new Thread<void> ("search_for", () => videos_list.search_for (text));
     }
 }
 
