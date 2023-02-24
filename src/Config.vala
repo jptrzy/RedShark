@@ -1,8 +1,16 @@
+public enum Backend {
+    NONE,
+
+    YOUTUBE_WITH_API,
+    YOUTUBE_WITH_YURUVERSE,
+}
+
 [SingleInstance]
 class Config : GLib.Object {
 
     public int config_version {get; set;}
     public string youtube_api_key {get; set;}
+    public Backend backend {get; set;}
 
     private Config() {}
    
@@ -33,6 +41,8 @@ class Config : GLib.Object {
             parser.load_from_file(config_file.get_path ());
 
             Config.instance = (Config) Json.gobject_deserialize (typeof(Config), parser.get_root ());
+
+            message ("%s", Config.get().backend.to_string ());
         } else {
             message (GJson.serialize_gobject(Config.get ()).to_string ());
 

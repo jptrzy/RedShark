@@ -1,12 +1,12 @@
+* { }
 
-* {
+.card_parent { }
+
+.card_parent > * { }
+
+/* Don't work */
+.carg_parent picture {
+    border-radius: 80pt;
 }
 
-.card_parent {
-    #background: #ff00ff;
-}
 
-.card_parent > *{
-    #background: #00ff00;
-    #margin: auto;
-}

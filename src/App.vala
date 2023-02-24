@@ -14,6 +14,7 @@ class App : Adw.Application {
     }
 
     static async void main (string[] args) {
+        Gtk.init ();
 
         // TODO Add proper gtk/adw dialog message
         try {
