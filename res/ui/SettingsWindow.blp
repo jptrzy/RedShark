@@ -2,35 +2,37 @@ using Gtk 4.0;
 using Adw 1;
 
 template SettingsWindow : Adw.PreferencesWindow {
-    Adw.ToastOverlay toast_overlay  {
-        Adw.PreferencesPage {
-            hexpand: true;
-            vexpand: true;
+    Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+            ListBox {
+                styles ["boxed-list"]
+                
+                Adw.ActionRow {
+                    title: "Save all settings";
 
-            Adw.PreferencesGroup {
-                ListBox {
-                    styles ["boxed-list"]
+                    Button {
+                        styles ["save_config", "pill", "suggested-action"]
 
-                    Adw.ActionRow {
-                        title: "Save all settings";
-
-                        Button {
-                            styles ["flat"]
-                            clicked => $save();
-                            Adw.ButtonContent {
-                                icon-name: "document-save-symbolic";
-                                label: "Save";
-                            }
+                        clicked => $save();
+                        Adw.ButtonContent {
+                            icon-name: "document-save-symbolic";
+                            label: "Save";
                         }
                     }
+                }
+            }
+        }
 
-                    Adw.ComboRow backend {
-                        title: "Backend";
-                    }
+        Adw.PreferencesGroup {
+            ListBox {
+                styles ["boxed-list"]
 
-                    Adw.PasswordEntryRow youtube_api_key {
-                        title: "Youtube API Key";
-                    }
+                Adw.ComboRow backend {
+                    title: "Backend";
+                }
+
+                Adw.PasswordEntryRow youtube_api_key {
+                    title: "Youtube API Key";
                 }
             }
         }

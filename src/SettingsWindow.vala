@@ -2,7 +2,6 @@
 class SettingsWindow : Adw.PreferencesWindow {
     private Config c = Config.get ();
 
-    [GtkChild] private unowned Adw.ToastOverlay toast_overlay;
     [GtkChild] private unowned Adw.ComboRow backend;
     [GtkChild] private unowned Adw.PasswordEntryRow youtube_api_key;
 
@@ -28,7 +27,7 @@ class SettingsWindow : Adw.PreferencesWindow {
             toast.timeout = 1;
             toast.priority = Adw.ToastPriority.HIGH;
     
-            toast_overlay.add_toast(toast);
+            add_toast(toast);
         } catch (Error err) {
             warning("There was an error while saving config '%s'", err.message);
 
@@ -36,7 +35,7 @@ class SettingsWindow : Adw.PreferencesWindow {
             toast.timeout = 3;
             toast.priority = Adw.ToastPriority.HIGH;
 
-            toast_overlay.add_toast(toast);
+            add_toast(toast);
         }
     }
 }
