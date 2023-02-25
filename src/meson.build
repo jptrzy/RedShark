@@ -8,6 +8,7 @@ sources += [
   'net/Fetch.vala',
   'net/Response.vala',
 
+  'SettingsWindow.vala',
   'AppWindow.vala',
   'App.vala',
 ]

@@ -11,14 +11,22 @@ class AppWindow : Adw.ApplicationWindow {
         videos_list = new VideosList (); 
 
         videos_list_holder.append (videos_list);
-
-
+    
+        // Css Styles
         var css_provider = new Gtk.CssProvider ();
 		css_provider.load_from_resource ("styles/AppWindow.css");
 		Gtk.StyleContext.add_provider_for_display (get_display (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
-    [GtkCallback]
+
+    public async void show_settings () {
+        message ("Show Settings");
+
+        var window = new SettingsWindow ();
+
+        window.show ();
+    }
+
     public async void show_info () {
         message ("Show info");
 

@@ -9,6 +9,7 @@
    <file compressed="true">ui/AppWindow.ui</file>
    <file compressed="true">ui/VideosList.ui</file>
    <file compressed="true">ui/VideosListEntry.ui</file>
+   <file compressed="true">ui/SettingsWindow.ui</file>
 
 </gresource>
 </gresources>

@@ -6,6 +6,7 @@ res_input = files (
   'ui/AppWindow.blp',
   'ui/VideosList.blp',
   'ui/VideosListEntry.blp',
+  'ui/SettingsWindow.blp',
 )
 
 #blueprints = custom_target('blueprints',
