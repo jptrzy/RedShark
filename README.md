@@ -1,4 +1,4 @@
-<img align="left" alt="Project logo" src="data/icons/app.drey.Redshark.svg" />
+<img align="left" alt="Project logo" src="data/icons/xyz.jptrzy.Redshark.svg" />
 # [WIP] Redshark
 It is a "simple" youtube client.
 
