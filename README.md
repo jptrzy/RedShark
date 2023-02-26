@@ -1,4 +1,5 @@
-# [WIP] RedShark
+<img align="left" alt="Project logo" src="data/icons/app.drey.Redshark.svg" />
+# [WIP] Redshark
 It is a "simple" youtube client.
 
 # How it works
@@ -29,10 +30,10 @@ meson compile
 ```
 
 # TODO
-* create icon 
 * play multiple video at once
-* support youtube alternatives
+* support youtube alternatives (PearTube)
 * rounded corner in image
-* settings page
 * download images async
+* ~~create icon~~
+* ~~settings page~~
 

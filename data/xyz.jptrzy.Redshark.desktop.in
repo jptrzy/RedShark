@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Redshark
+GenericName=YouTube Client
+Comment=Search throw youtube
+Icon=${icon_name}
+TryExec=${command}
+Exec=${command}
+Terminal=false
+Categories=Player;Network;GTK;
+Keywords=youtube;videos;
+StartupNotify=true

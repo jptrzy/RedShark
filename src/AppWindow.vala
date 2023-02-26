@@ -32,6 +32,7 @@ class AppWindow : Adw.ApplicationWindow {
 
 		var window = new Adw.AboutWindow();
 
+        window.application_icon = "xyz.jptrzy.Redshark";
         window.application_name = "RedShark";
         window.version = "0.0.1";
         window.developer_name = "Jakub (jptrzy) Trzeciak";
